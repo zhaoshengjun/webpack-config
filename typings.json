@@ -1,0 +1,6 @@
+{
+  "dependencies": {
+    "chalk": "registry:npm/chalk#1.1.1+20160812215109",
+    "path-exists": "registry:npm/path-exists#3.0.0+20160724002618"
+  }
+}
