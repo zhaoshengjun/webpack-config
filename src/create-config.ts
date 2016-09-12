@@ -3,7 +3,7 @@ import * as path from 'path';
 import * as pathExists from 'path-exists';
 
 //need to go up 3 levels to get the package folder
-const globalPath = path.dirname(path.dirname(path.dirname(module.filename))); 
+const globalPath = path.dirname(path.dirname(module.filename)); 
 
 const templateFolder =path.join(globalPath,'template');
 const templateFileFolder = {
