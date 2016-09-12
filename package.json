@@ -1,5 +1,5 @@
 {
-  "name": "webpack-config",
+  "name": "webpack-config-cli",
   "version": "0.1.0",
   "description": "CLI tool to generate webpack.config.js",
   "main": "dist/index.js",
