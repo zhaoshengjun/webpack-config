@@ -5,7 +5,7 @@ CLI tool to generate [webpack](https://github.com/webpack/webpack) configuration
 ## Usage
 
 ```bash
-npm i -g webpack-config
+npm i -g create-webpack-config
 webpack-config init
 ```
 

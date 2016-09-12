@@ -2,10 +2,11 @@ import * as chalk from 'chalk';
 
 const yellow = chalk.yellow;
 const green = chalk.green;
+const success = chalk.white.bgGreen.bold;
 
 const outputFinalMessage = () =>{
   console.log(`
-Success! Created ${yellow('webpack.config.js')} for you.
+${success('SUCCESS')} Created ${yellow('webpack.config.js')} for you.
 
 From now on, just follow the following conventions:
 

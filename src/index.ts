@@ -7,14 +7,14 @@ import * as yargs from 'yargs';
 yargs
   .usage('Usage: $0 [command] [options]')
   .command('init', 'Create webpack.config.js for you')
-  .option('react', {
-    alias: 'r',
-    describe: 'configuration for react app, including HMR',
-  })
-  .option('angular', {
-    alias: 'n',
-    describe: 'configuration for angular2 app',
-  })
+  // .option('react', {
+  //   alias: 'r',
+  //   describe: 'configuration for react app, including HMR (not ready yet)',
+  // })
+  // .option('angular', {
+  //   alias: 'n',
+  //   describe: 'configuration for angular2 app (not)',
+  // })
   .help('help')
   .alias('h', 'help')
   .epilog('Copyright 2016 Sam Zhao');
