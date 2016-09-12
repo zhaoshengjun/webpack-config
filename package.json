@@ -1,11 +1,15 @@
 {
   "name": "webpack-config",
-  "version": "1.0.0",
+  "version": "0.1.0",
   "description": "CLI tool to generate webpack.config.js",
   "main": "dist/index.js",
   "scripts": {
     "start": "webpack ",
-    "build": "webpack -p"
+    "build": "webpack -p",
+    "commit": "git-cz"
+  },
+  "czConfig": {
+    "path":"node_modules/cz-conventional-changelog"
   },
   "bin": {
     "webpack-config": "./bin/webpack-config"
@@ -37,6 +41,8 @@
     "path-exists": "3.0.0"
   },
   "devDependencies": {
+    "commitizen": "^2.8.6",
+    "cz-conventional-changelog": "^1.2.0",
     "typescript": "1.8.10",
     "typings": "1.3.3",
     "webpack": "^1.13.2"
