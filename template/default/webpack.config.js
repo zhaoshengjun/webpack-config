@@ -1,20 +1,35 @@
 const path = require('path');
+const webpack = require('webpack');
+const htmlPlugin = require('html-webpack-plugin');
+const openBrowserPlugin = require('open-browser-webpack-plugin'); 
+
 const PATHS = {
   app: path.join(__dirname, 'src'),
+  images:path.join(__dirname,'src/assets/'),
   build: path.join(__dirname, 'dist')
 };
 
+const options = {
+  host:'localhost',
+  port:'1234'
+};
+
 module.exports = {
-  // Entry accepts a path or an object of entries.
-  // We'll be using the latter form given it's
-  // convenient with more complex configurations.
   entry: {
     app: PATHS.app
   },
   output: {
     path: PATHS.build,
-    filename: '[name].js'
+    filename: 'bundle.js'
   },
+  devServer: {
+      historyApiFallback: true,
+      hot: true,
+      inline: true,
+      stats: 'errors-only',
+      host: options.host, // Defaults to `localhost`
+      port: options.port // Defaults to 8080
+    },
   module: {
     loaders: [
       {
@@ -29,11 +44,27 @@ module.exports = {
       {
         test: /\.css$/,
         loaders: ['style', 'css'],
-        include: paths
+        include:PATHS.app
       },
       {
-        
-      }
+        test: /\.(ico|jpg|png|gif|eot|otf|webp|svg|ttf|woff|woff2)(\?.*)?$/,        
+        loader: 'file',
+        query: {
+          name: '[path][name].[ext]'
+        }
+      },      
     ]
-  }
+  },
+  plugins:[
+    new webpack.HotModuleReplacementPlugin({
+        multiStep: true
+    }),
+    new htmlPlugin({
+      template:path.join(PATHS.app,'index.html'),
+      inject:'body'
+    }),
+    new openBrowserPlugin({
+      url: `http://${options.host}:${options.port}`
+    })
+  ]
 };

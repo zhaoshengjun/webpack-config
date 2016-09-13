@@ -3,6 +3,7 @@
 import {outputFinalMessage} from './message';
 import { createConfig } from './create-config';
 import * as yargs from 'yargs';
+let pkg = require('../package.json');
 
 yargs
   .usage('Usage: $0 [command] [options]')
@@ -17,7 +18,7 @@ yargs
   // })
   .help('help')
   .alias('h', 'help')
-  .epilog('Copyright 2016 Sam Zhao');
+  .epilog(`v${pkg.version} Copyright 2016 Sam Zhao`);
 var argv = yargs.argv;
 
 if (argv.r) {

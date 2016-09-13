@@ -14,49 +14,35 @@ var templateFileFolder = {
         package: path.join(templateFolder, 'angular2/package.json')
     },
     DEFAULT: {
-        config: path.join(templateFolder, 'default/webpack.config.js'),
+        config: path.join(templateFolder, 'default/'),
         package: path.join(templateFolder, 'default/package.json')
     }
 };
 var appFolder = process.cwd();
-var copyFile = function (sourceFile, targetFile, rename) {
-    if (rename === void 0) { rename = true; }
-    if (rename && pathExists.sync(targetFile)) {
-        var _a = path.parse(targetFile), name_1 = _a.name, ext = _a.ext;
-        var renameFile = path.join(path.dirname(targetFile), name_1 + '.old' + ext);
-        fs.renameSync(targetFile, renameFile);
-    }
-    fs.copySync(sourceFile, targetFile);
+var copyTemplateFolder = function (srcFolder) {
+    console.log(srcFolder, ' ===> ', appFolder);
+    fs.copySync(srcFolder, appFolder);
 };
-var updatePackage = function () {
+var updatePackage = function (srcFile) {
     var pkgFile = path.join(appFolder, 'package.json');
+    var templatePkgFile = require(srcFile);
     if (pathExists.sync(pkgFile)) {
         var pkg = require(pkgFile);
-        pkg.scripts = Object.assign({}, pkg.scripts, {
-            "start": "webpack ",
-            "build": "rimraf dist/ && webpack -p"
-        });
+        pkg.scripts = Object.assign({}, pkg.scripts, templatePkgFile.scripts);
         fs.writeFileSync(pkgFile, JSON.stringify(pkg, null, 2));
     }
     else {
-        copyFile(templateFileFolder.DEFAULT.package, pkgFile, false);
+        fs.copySync(srcFile, pkgFile);
     }
-};
-var createFolders = function () {
-    fs.ensureDirSync(path.join(appFolder, 'src'));
-    fs.ensureDirSync(path.join(appFolder, 'dist'));
 };
 var createConfig = function (configType) {
     if (configType === void 0) { configType = 'normal'; }
-    console.log("Creating webpack.config.js for " + configType + " project...");
-    console.log('cli path', module.filename);
     switch (configType) {
         case 'react':
         case 'angular':
         default:
-            copyFile(templateFileFolder.DEFAULT.config, path.join(appFolder, 'webpack.config.js'));
-            createFolders();
-            updatePackage();
+            updatePackage(templateFileFolder.DEFAULT.package);
+            copyTemplateFolder(templateFileFolder.DEFAULT.config);
     }
 };
 exports.createConfig = createConfig;

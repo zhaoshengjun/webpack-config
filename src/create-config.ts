@@ -16,56 +16,44 @@ const templateFileFolder = {
     package:path.join(templateFolder,'angular2/package.json')
   },
   DEFAULT: {
-    config: path.join(templateFolder,'default/webpack.config.js'),
+    config: path.join(templateFolder,'default/'),
     package:path.join(templateFolder,'default/package.json')
   }
 }
 
 const appFolder = process.cwd();
 
-const copyFile = (sourceFile: string, targetFile: string, rename: boolean = true) => {
-  if (rename && pathExists.sync(targetFile)) {
-    let {name,ext} = path.parse(targetFile);
-    let renameFile = path.join(path.dirname(targetFile), name+'.old'+ext);
-    fs.renameSync(targetFile, renameFile);
-  }
-  fs.copySync(sourceFile, targetFile);
+const copyTemplateFolder = (srcFolder: string) => {
+  console.log(srcFolder, ' ===> ', appFolder);
+  fs.copySync(srcFolder, appFolder);
 }
 
-const updatePackage = () => {
+const updatePackage = (srcFile: string) => {
   let pkgFile = path.join(appFolder, 'package.json');
+  let templatePkgFile = require(srcFile);
   if (pathExists.sync(pkgFile)) {
     let pkg = require(pkgFile);  
     pkg.scripts = Object.assign(
       {},
       pkg.scripts,
-      {
-        "start": "webpack ",
-        "build":"rimraf dist/ && webpack -p"
-      });
+      templatePkgFile.scripts
+    );
     fs.writeFileSync(pkgFile, JSON.stringify(pkg,null,2));
   } else {
-    copyFile(templateFileFolder.DEFAULT.package, pkgFile,false);
+    fs.copySync(srcFile, pkgFile);
   }
 }
 
-const createFolders = () => {
-  fs.ensureDirSync(path.join(appFolder,'src'));
-  fs.ensureDirSync(path.join(appFolder,'dist'));
-} 
 
-const createConfig = (configType: string = 'normal') => {
-  console.log(`Creating webpack.config.js for ${configType} project...`);
-  console.log('cli path',module.filename);  
+const createConfig = (configType: string = 'normal') => {    
   switch (configType) {
     case 'react':
 
     case 'angular':
 
     default:
-      copyFile(templateFileFolder.DEFAULT.config, path.join(appFolder, 'webpack.config.js'));
-      createFolders();
-      updatePackage();
+      updatePackage(templateFileFolder.DEFAULT.package);
+      copyTemplateFolder(templateFileFolder.DEFAULT.config);      
   }
 }
 
