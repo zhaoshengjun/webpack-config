@@ -4,7 +4,7 @@
   "description": "",
   "main": "src/index.js",
   "scripts": {
-    "start": "webpack-dev-server",
+    "start": "webpack-dashboard -- webpack-dev-server",
     "prebuild": "rimraf dist",
     "build": "webpack -p"
   },
@@ -23,6 +23,7 @@
     "rimraf": "^2.4.3",
     "style-loader": "^0.13.1",
     "webpack": "^1.13.2",
+    "webpack-dashboard": "0.1.8",
     "webpack-dev-server": "1.15.1"
   }
 }

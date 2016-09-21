@@ -28,6 +28,7 @@ With the popularize of Create-React-App (CRA), I think it's worth another shot b
 
 
 ## Release History
+- 0.1.6 - Add `webpack-dashboard`!
 - ​0.1.4 - :white_check_mark: Make the template work after adding webpack dev server
 - 0.1.0 - Prototype release
 

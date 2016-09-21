@@ -2,6 +2,7 @@ const path = require('path');
 const webpack = require('webpack');
 const htmlPlugin = require('html-webpack-plugin');
 const openBrowserPlugin = require('open-browser-webpack-plugin'); 
+const dashboardPlugin = require('webpack-dashboard/plugin'); 
 
 const PATHS = {
   app: path.join(__dirname, 'src'),
@@ -27,8 +28,8 @@ module.exports = {
       hot: true,
       inline: true,
       stats: 'errors-only',
-      host: options.host, // Defaults to `localhost`
-      port: options.port // Defaults to 8080
+      host: options.host,
+      port: options.port 
     },
   module: {
     loaders: [
@@ -56,6 +57,7 @@ module.exports = {
     ]
   },
   plugins:[
+    new dashboardPlugin(),
     new webpack.HotModuleReplacementPlugin({
         multiStep: true
     }),
