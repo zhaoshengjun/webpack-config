@@ -1,8 +1,8 @@
 #!/usr/bin/env node
 "use strict";
-var message_1 = require("./message");
-var create_config_1 = require("./create-config");
-var yargs = require("yargs");
+var message_1 = require('./message');
+var create_config_1 = require('./create-config');
+var yargs = require('yargs');
 var pkg = require('../package.json');
 yargs
     .usage('Usage: $0 [command] [options]')

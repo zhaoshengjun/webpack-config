@@ -1,5 +1,5 @@
 "use strict";
-var chalk = require("chalk");
+var chalk = require('chalk');
 var yellow = chalk.yellow;
 var green = chalk.green;
 var success = chalk.white.bgGreen.bold;

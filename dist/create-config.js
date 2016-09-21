@@ -1,7 +1,7 @@
 "use strict";
-var fs = require("fs-extra");
-var path = require("path");
-var pathExists = require("path-exists");
+var fs = require('fs-extra');
+var path = require('path');
+var pathExists = require('path-exists');
 var globalPath = path.dirname(path.dirname(module.filename));
 var templateFolder = path.join(globalPath, 'template');
 var templateFileFolder = {
