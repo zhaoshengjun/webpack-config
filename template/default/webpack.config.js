@@ -1,8 +1,9 @@
-const path = require('path');
-const webpack = require('webpack');
-const htmlPlugin = require('html-webpack-plugin');
+const path              = require('path');
+const webpack           = require('webpack');
+const htmlPlugin        = require('html-webpack-plugin');
 const openBrowserPlugin = require('open-browser-webpack-plugin'); 
-const dashboardPlugin = require('webpack-dashboard/plugin'); 
+const dashboardPlugin   = require('webpack-dashboard/plugin');
+const autoprefixer      = require('autoprefixer'); 
 
 const PATHS = {
   app: path.join(__dirname, 'src'),
@@ -21,7 +22,7 @@ module.exports = {
   },
   output: {
     path: PATHS.build,
-    filename: 'bundle.js'
+    filename: 'bundle.[hash].js'
   },
   devServer: {
       historyApiFallback: true,
@@ -44,9 +45,10 @@ module.exports = {
       },
       {
         test: /\.css$/,
-        loaders: ['style', 'css'],
+        loaders: ['style', 'css', 'postcss'],
         include:PATHS.app
       },
+      
       {
         test: /\.(ico|jpg|png|gif|eot|otf|webp|svg|ttf|woff|woff2)(\?.*)?$/,        
         loader: 'file',
@@ -55,6 +57,18 @@ module.exports = {
         }
       },      
     ]
+  },
+  postcss: function() {
+    return [
+      autoprefixer({
+        browsers: [
+          '>1%',
+          'last 4 versions',
+          'Firefox ESR',
+          'not ie < 9',
+        ]
+      }),
+    ];
   },
   plugins:[
     new dashboardPlugin(),

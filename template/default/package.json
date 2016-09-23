@@ -12,6 +12,7 @@
   "author": "",
   "license": "",
   "devDependencies": {
+    "autoprefixer": "6.4.1",
     "babel-core": "^6.0.0",
     "babel-loader": "^6.2.5",
     "babel-preset-es2015": "^6.0.0",
@@ -20,6 +21,7 @@
     "html-loader": "0.4.3",
     "html-webpack-plugin": "2.22.0",
     "open-browser-webpack-plugin": "0.0.2",
+    "postcss-loader": "0.13.0",
     "rimraf": "^2.4.3",
     "style-loader": "^0.13.1",
     "webpack": "^1.13.2",
